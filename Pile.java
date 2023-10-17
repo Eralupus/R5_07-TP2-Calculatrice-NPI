@@ -64,10 +64,6 @@ public class Pile
 			temp[cpt] = this.ensCarac[this.sommet-cpt-1];
 
 
-
-
-
-
 		this.ensCarac = temp;
 
 		
