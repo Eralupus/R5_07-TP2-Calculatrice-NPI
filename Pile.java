@@ -1,95 +1,82 @@
-public class Pile 
+public class Pile
 {
+	private String[]	 tab;
+	private int   	 sommet;
 	
-	private char[] ensCarac ;
-	private int    sommet   ;
-
-	
-	public Pile ( int nbEltTot )
+	public Pile( int nbElementTotal)
 	{
-		this.sommet = 0 ;
-		this.ensCarac = new char[nbEltTot] ;
+		this.tab = new String[nbElementTotal];
+		this.sommet = 0;
 	}
 	
 	public Pile ( Pile p )
 	{
 		this.sommet = p.sommet;
-		this.ensCarac = new char[p.ensCarac.length];
+		this.tab = new String[p.tab.length];
 		
-		for (int cpt=0; cpt<this.sommet; cpt++)
-			this.ensCarac[cpt] = p.ensCarac[cpt];
-
+		for (int cpt = 0 ; cpt < this.sommet ; cpt++ )
+			this.tab[cpt] = p.tab[cpt];
 	}
-
-
 	
 	public boolean estVide()
 	{
 		return this.sommet == 0;
-
 	}
 	
 	public boolean estPleine()
 	{
-		return this.sommet == this.ensCarac.length;
-
+		return this.sommet == this.tab.length ;
 	}
 	
-	public boolean empiler( char c )
+	public boolean empiler( String c )
+	{
+		if ( this.estPleine() ) return false;
+		
+		this.tab[this.sommet++] = c;
+		return true; 
+	}
+	
+	public String depiler()
+	{
+		return this.tab[--this.sommet];
+	}
+	
+	public void retourner ()
+	{
+		String[] tmp = new String[this.tab.length];
+		
+		for ( int cpt = 0 ; cpt < this.sommet ; cpt++ )
+			tmp[cpt] = this.tab[this.sommet - cpt - 1] ;
+		
+		this.tab = tmp;
+		
+	}
+	
+	public String ConsulterSommet()
 	{
 		
-		if( this.estPleine() ) return false ;
-
-		this.ensCarac[this.sommet++] = c;
-		return true;
-		
-		
+		return  this.tab[this.sommet] ;
 	}
-		
-	public char depiler()
+	
+	
+	
+	public void supprimer()
 	{
-		return this.ensCarac[--this.sommet];
-
-
-	
+		if ( ! this.estVide() )
+			this.tab[this.sommet--] = " ";
 	}
 	
-
-	public void retourner()
-	{
-		char[] temp = new char[this.ensCarac.length];
-
-		for(int cpt=0; cpt < this.sommet; cpt++)
-		
-			temp[cpt] = this.ensCarac[this.sommet-cpt-1];
-
-
-		this.ensCarac = temp;
-
-		
-	
-		
-	}
-
 	public String toString()
 	{
+		String sRet ="";
 		
-		String sRet ="" ;
-		
-		for( int cpt = 0 ; cpt< this.sommet ; cpt++ )
-		{
+		for ( int cpt = this.sommet - 1 ; cpt >= 0 ; cpt-- )
 			
-			sRet += this.ensCarac[cpt] ; 
+			sRet += " |" + this.tab[cpt] + "|\n" ;
+			
+			sRet += "******\n" ;
+			  
 		
-		}
-		
-		return sRet ;
-		
-	}
-
-
-
-
-
-
+		return sRet;
+	}	
 }
